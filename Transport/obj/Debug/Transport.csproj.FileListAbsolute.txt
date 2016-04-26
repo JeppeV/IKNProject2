@@ -1,0 +1,14 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\obj\Debug\Transport.csprojResolveAssemblyReference.cache
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\Transport.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\Transport.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\Link.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\mscorlib.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\Link.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\da\mscorlib.resources.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\normidna.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\normnfc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\normnfd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\normnfkc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\bin\Debug\normnfkd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\obj\Debug\Transport.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Transport\obj\Debug\Transport.pdb

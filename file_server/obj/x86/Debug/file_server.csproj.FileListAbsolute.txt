@@ -1,0 +1,11 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\file_server.exe
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\file_server.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\LIB.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\Transport.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\Link.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\Transport.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\LIB.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Debug\Link.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\obj\x86\Debug\file_server.csprojResolveAssemblyReference.cache
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\obj\x86\Debug\file_server.exe
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\obj\x86\Debug\file_server.pdb

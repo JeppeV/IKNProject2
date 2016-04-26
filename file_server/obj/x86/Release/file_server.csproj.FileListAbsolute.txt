@@ -1,0 +1,6 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Release\file_server.exe
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Release\LIB.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Release\Transport.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\bin\Release\Link.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\obj\x86\Release\file_server.csprojResolveAssemblyReference.cache
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\file_server\obj\x86\Release\file_server.exe

@@ -1,0 +1,5 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\obj\Debug\Link.csprojResolveAssemblyReference.cache
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Debug\Link.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Debug\Link.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\obj\Debug\Link.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\obj\Debug\Link.pdb

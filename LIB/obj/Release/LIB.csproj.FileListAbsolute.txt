@@ -1,0 +1,10 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\LIB.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\mscorlib.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\System.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\da\mscorlib.resources.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\normidna.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\normnfc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\normnfd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\normnfkc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Release\normnfkd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\obj\Release\LIB.dll

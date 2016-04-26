@@ -1,0 +1,13 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\LIB.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\LIB.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\mscorlib.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\System.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\da\mscorlib.resources.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\normidna.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\normnfc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\normnfd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\normnfkc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\bin\Debug\normnfkd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\obj\Debug\LIB.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\obj\Debug\LIB.pdb
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\LIB\obj\Debug\LIB.csprojResolveAssemblyReference.cache

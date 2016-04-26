@@ -1,0 +1,9 @@
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\Link.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\mscorlib.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\da\mscorlib.resources.dll
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\normidna.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\normnfc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\normnfd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\normnfkc.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\bin\Release\normnfkd.nlp
+C:\Users\Jeppe Vinberg\Desktop\Exercise13\Link\obj\Release\Link.dll

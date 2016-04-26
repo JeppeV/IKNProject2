@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="file_server\file_server.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Link\LinkLayerReceiver.cs">
+    <Files>
+      <File FileName="file_server\AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="Link\LinkLayerReceiver.cs" Line="18" Column="11" />
+      <File FileName="Link\LinkLayerSender.cs" Line="1" Column="1" />
+      <File FileName="file_server\file_server.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Link", "Link.csproj", "{6D10C85B-63E3-416B-A3B8-0E6498B7C1C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkSenderTest", "LinkSenderTest\LinkSenderTest.csproj", "{7B55FC7D-3892-4B41-9E16-9FE24AC05AB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkReceiverTest", "LinkReceiverTest\LinkReceiverTest.csproj", "{5A0341C0-25B7-4D4D-B194-153CD0BEE84A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A0341C0-25B7-4D4D-B194-153CD0BEE84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0341C0-25B7-4D4D-B194-153CD0BEE84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0341C0-25B7-4D4D-B194-153CD0BEE84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0341C0-25B7-4D4D-B194-153CD0BEE84A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D10C85B-63E3-416B-A3B8-0E6498B7C1C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D10C85B-63E3-416B-A3B8-0E6498B7C1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D10C85B-63E3-416B-A3B8-0E6498B7C1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D10C85B-63E3-416B-A3B8-0E6498B7C1C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B55FC7D-3892-4B41-9E16-9FE24AC05AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B55FC7D-3892-4B41-9E16-9FE24AC05AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B55FC7D-3892-4B41-9E16-9FE24AC05AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B55FC7D-3892-4B41-9E16-9FE24AC05AB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
