@@ -14,7 +14,7 @@ public class LinkLayerSender
 	public static void Main (string[] args)
 	{
 
-		LinkLayerReceiver receiver = new LinkLayerReceiver ();
+		LinkLayerSender receiver = new LinkLayerSender ();
 		byte[] buffer = new byte[10];
 		buffer [0] = 240;
 		receiver.link.send (buffer, 5);

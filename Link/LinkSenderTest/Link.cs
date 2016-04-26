@@ -36,8 +36,8 @@ namespace Linklaget
 				serialPort.Open();
 
 			buffer = new byte[(BUFSIZE*2)];
-
-			serialPort.ReadTimeout = 200;
+			//change to 200 at some point
+			serialPort.ReadTimeout = 1000;
 			serialPort.DiscardInBuffer ();
 			serialPort.DiscardOutBuffer ();
 		}
@@ -67,7 +67,7 @@ namespace Linklaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			return serialPort.Read (buf, 0, 100);
+			return serialPort.Read (buf, 0, buf.Length);
 		}
 	}
 }

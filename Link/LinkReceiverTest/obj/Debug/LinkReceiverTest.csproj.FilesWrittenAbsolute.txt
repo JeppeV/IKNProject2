@@ -1,0 +1,5 @@
+/root/Desktop/IKNProject2/Link/LinkReceiverTest/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/root/Desktop/IKNProject2/Link/LinkReceiverTest/bin/Debug/LinTest.exe.mdb
+/root/Desktop/IKNProject2/Link/LinkReceiverTest/bin/Debug/LinTest.exe
+/root/Desktop/IKNProject2/Link/LinkReceiverTest/obj/Debug/LinTest.exe
+/root/Desktop/IKNProject2/Link/LinkReceiverTest/obj/Debug/LinTest.exe.mdb
