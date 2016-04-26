@@ -17,7 +17,9 @@ public class LinkLayerSender
 		LinkLayerSender receiver = new LinkLayerSender ();
 		byte[] buffer = new byte[10];
 		buffer [0] = 240;
-		receiver.link.send (buffer, 5);
+		buffer [1] = (byte)'A';
+		buffer [2] = 240;
+		receiver.link.send (buffer, 3);
 		Console.Write ("Buffer sent");
 
 	}

@@ -53,20 +53,25 @@ namespace Linklaget
 		/// </param>
 		public void send (byte[] buf, int size)
 		{
+			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
+			char c;
 			buffer [0] = DELIMITER;
-
+			int j = 1;
 			for (int i = 0; i < size; i++) {
 				current = buf [i];
-				if (current == (byte)'A') {
-					buffer [buffer.Length] = (byte)'B';
-					buffer [buffer.Length] = (byte)'C';
-				} else if (current == (byte)'B') {
-					buffer [buffer.Length] = (byte)'B';
-					buffer [buffer.Length] = (byte)'D';
+				c = Convert.ToChar (current);
+				if (c == 'A') {
+					buffer [j++] = (byte)'B';
+					buffer [j++] = (byte)'C';
+				} else if (c == 'B') {
+					buffer [j++] = (byte)'B';
+					buffer [j++] = (byte)'D';
+				} else {
+					buffer [j++] = current;
 				}
 			}
-			buffer [buffer.Length] = DELIMITER;
+			buffer [j] = DELIMITER;
 			serialPort.Write (buffer, 0, buffer.Length);
 			
 		}
@@ -82,19 +87,22 @@ namespace Linklaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
+			Array.Clear (buffer, 0, buffer.Length);
 			char c = Convert.ToChar((byte)serialPort.ReadByte ());
 			if (c == 'A') {
 				byte current;
+				int count = 0;
 				while (true) {
 					current = (byte) serialPort.ReadByte ();
 					c = Convert.ToChar (current);
 					if (c == 'A')
 						break;
 					else {
-						buffer [buffer.Length] = current;
+						buffer [count++] = current;
 					}
 
 				}
+				int j = 0;
 				for (int i = 0; i < buffer.Length; i++) {
 					current = buffer [i];
 					c = Convert.ToChar (current);
@@ -103,13 +111,13 @@ namespace Linklaget
 						current = buffer [i];
 						c = Convert.ToChar (current);
 						if (c == 'C') {
-							buf[buf.Length] = (byte)'A';
+							buf[j++] = (byte)'A';
 
 						} else if (c == 'D') {
-							buf[buf.Length] = (byte)'B';
+							buf[j++] = (byte)'B';
 						}
 					} else {
-						buf [buf.Length] = current;
+						buf [j++] = current;
 					}
 				}
 
