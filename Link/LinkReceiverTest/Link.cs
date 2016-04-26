@@ -37,7 +37,6 @@ namespace Linklaget
 
 			buffer = new byte[(BUFSIZE*2)];
 
-			//change back to 200 at some point
 			serialPort.ReadTimeout = 10000;
 			serialPort.DiscardInBuffer ();
 			serialPort.DiscardOutBuffer ();
@@ -54,7 +53,22 @@ namespace Linklaget
 		/// </param>
 		public void send (byte[] buf, int size)
 		{
-			serialPort.Write (buf, 0, size);
+			byte current;
+			buffer [0] = DELIMITER;
+
+			for (int i = 0; i < size; i++) {
+				current = buf [i];
+				if (current == (byte)'A') {
+					buffer [buffer.Length] = (byte)'B';
+					buffer [buffer.Length] = (byte)'C';
+				} else if (current == (byte)'B') {
+					buffer [buffer.Length] = (byte)'B';
+					buffer [buffer.Length] = (byte)'D';
+				}
+			}
+			buffer [buffer.Length] = DELIMITER;
+			serialPort.Write (buffer, 0, buffer.Length);
+			
 		}
 
 		/// <summary>
@@ -68,7 +82,41 @@ namespace Linklaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			return serialPort.Read (buf, 0, buf.Length);
+			char c = Convert.ToChar((byte)serialPort.ReadByte ());
+			if (c == 'A') {
+				byte current;
+				while (true) {
+					current = (byte) serialPort.ReadByte ();
+					c = Convert.ToChar (current);
+					if (c == 'A')
+						break;
+					else {
+						buffer [buffer.Length] = current;
+					}
+
+				}
+				for (int i = 0; i < buffer.Length; i++) {
+					current = buffer [i];
+					c = Convert.ToChar (current);
+					if (c == 'B') {
+						i++;
+						current = buffer [i];
+						c = Convert.ToChar (current);
+						if (c == 'C') {
+							buf[buf.Length] = (byte)'A';
+
+						} else if (c == 'D') {
+							buf[buf.Length] = (byte)'B';
+						}
+					} else {
+						buf [buf.Length] = current;
+					}
+				}
+
+
+			}
+			return buf.Length;
+
 		}
 	}
 }

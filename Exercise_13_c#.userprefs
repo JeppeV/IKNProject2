@@ -1,6 +1,15 @@
 ﻿<Properties StartupItem="file_server\file_server.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Link/Link.cs">
+    <Files>
+      <File FileName="Transport/Transport.cs" Line="4" Column="4" />
+      <File FileName="Link/Link.cs" Line="22" Column="22" />
+      <File FileName="Transport/Checksum.cs" Line="1" Column="1" />
+      <File FileName="Link/LinkReceiverTest/LinkLayerReceiver.cs" Line="1" Column="1" />
+      <File FileName="Link/LinkReceiverTest/Link.cs" Line="16" Column="16" />
+      <File FileName="Link/LinkReceiverTest/LinkLayerSender.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

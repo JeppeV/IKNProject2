@@ -34,34 +34,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Link.cs" />
-    <Compile Include="LinkReceiverTest\Link.cs" />
-    <Compile Include="LinkReceiverTest\LinkLayerReceiver.cs" />
-    <Compile Include="LinkReceiverTest\LinkLayerSender.cs" />
-    <Compile Include="LinkReceiverTest\Program.cs" />
-    <Compile Include="LinkReceiverTest\TransConst.cs" />
-    <Compile Include="LinkReceiverTest\Properties\AssemblyInfo.cs" />
-    <Compile Include="LinkReceiverTest\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="LinkReceiverTest\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="LinkReceiverTest\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="LinkSenderTest\Link.cs" />
-    <Compile Include="LinkSenderTest\LinkLayerReceiver.cs" />
-    <Compile Include="LinkSenderTest\LinkLayerSender.cs" />
-    <Compile Include="LinkSenderTest\Program.cs" />
-    <Compile Include="LinkSenderTest\TransConst.cs" />
-    <Compile Include="LinkSenderTest\Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="LinkReceiverTest\" />
-    <Folder Include="LinkSenderTest\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LinkReceiverTest\LinkReceiverTest.csproj" />
-    <None Include="LinkReceiverTest\bin\Debug\LinTest.exe" />
-    <None Include="LinkReceiverTest\bin\Debug\LinTest.pdb" />
-    <None Include="LinkReceiverTest\obj\Debug\LinTest.exe" />
-    <None Include="LinkReceiverTest\obj\Debug\LinTest.pdb" />
-    <None Include="LinkReceiverTest\obj\Debug\LinkReceiverTest.csproj.FileListAbsolute.txt" />
-    <None Include="LinkSenderTest\LinkSenderTest.csproj" />
-  </ItemGroup>
 </Project>
