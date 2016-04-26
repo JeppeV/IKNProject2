@@ -2,11 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Link.cs">
     <Files>
-      <File FileName="LinkReceiverTest/Link.cs" Line="4" Column="4" />
-      <File FileName="LinkSenderTest/LinkLayerSender.cs" Line="3" Column="3" />
-      <File FileName="LinkSenderTest/Link.cs" Line="4" Column="4" />
-      <File FileName="LinkReceiverTest/LinkLayerReceiver.cs" Line="1" Column="1" />
-      <File FileName="Link.cs" Line="34" Column="34" />
+      <File FileName="LinkSenderTest/LinkLayerSender.cs" Line="20" Column="20" />
+      <File FileName="Link.cs" Line="14" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

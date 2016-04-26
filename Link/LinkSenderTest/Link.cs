@@ -103,7 +103,7 @@ namespace Linklaget
 
 				}
 				int j = 0;
-				for (int i = 0; i < buffer.Length; i++) {
+				for (int i = 0; i < count; i++) {
 					current = buffer [i];
 					c = Convert.ToChar (current);
 					if (c == 'B') {
