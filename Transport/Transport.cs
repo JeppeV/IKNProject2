@@ -102,8 +102,19 @@ namespace Transportlaget
 		/// </param>
 		public void send(byte[] buf, int size)
 		{
-			// TO DO Your own code
+			byte[] sendBuffer = new byte[size + 4];
+			sendBuffer [TransCHKSUM.SEQNO] = seqNo++;
+			sendBuffer [TransCHKSUM.TYPE] = TransType.DATA;
+			Array.Copy (buf, 0, sendBuffer, 4, size);
+			checksum.calcChecksum (sendBuffer, sendBuffer.Length);
+			link.send (sendBuffer, sendBuffer.Length);
+			while (!receiveAck ()) {
+				link.send (sendBuffer, sendBuffer.Length);
+			}
+
+
 		}
+			
 
 		/// <summary>
 		/// Receive the specified buffer.
@@ -113,8 +124,15 @@ namespace Transportlaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			// TO DO Your own code
-			return 0;
+			byte[] receiveBuffer = new byte[buf.Length];
+			int size = link.receive(ref receiveBuffer);
+			while (!checksum.checkChecksum (receiveBuffer, size)) {
+				sendAck (false);
+				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
+				size = link.receive (ref receiveBuffer);
+			}
+			sendAck (true);
+			return size;
 		}
 	}
 }
