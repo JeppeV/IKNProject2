@@ -88,6 +88,7 @@ namespace Linklaget
 		public int receive (ref byte[] buf)
 		{
 			Array.Clear (buffer, 0, buffer.Length);
+			int j = 0;
 			char c = Convert.ToChar((byte)serialPort.ReadByte ());
 			if (c == 'A') {
 				byte current;
@@ -102,7 +103,7 @@ namespace Linklaget
 					}
 
 				}
-				int j = 0;
+
 				for (int i = 0; i < count; i++) {
 					current = buffer [i];
 					c = Convert.ToChar (current);
@@ -123,7 +124,7 @@ namespace Linklaget
 
 
 			}
-			return buf.Length;
+			return j;
 
 		}
 	}

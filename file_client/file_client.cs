@@ -13,36 +13,47 @@ namespace Application
 		/// </summary>
 		const int BUFSIZE = 1000;
 
+		byte[] output;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="file_client"/> class.
-		/// 
-		/// file_client metoden opretter en peer-to-peer forbindelse
-		/// Sender en forspÃ¸rgsel for en bestemt fil om denne findes pÃ¥ serveren
-		/// Modtager filen hvis denne findes eller en besked om at den ikke findes (jvf. protokol beskrivelse)
-		/// Lukker alle streams og den modtagede fil
-		/// Udskriver en fejl-meddelelse hvis ikke antal argumenter er rigtige
-		/// </summary>
-		/// <param name='args'>
-		/// Filnavn med evtuelle sti.
-		/// </param>
+		private Transport transportLayer;
+
+
 	    private file_client(String[] args)
 	    {
-	    	// TO DO Your own code
+			transportLayer = new Transport (BUFSIZE);
+			String filePath = args [0];
+			output = GetBytes (filePath);
+			transportLayer.send (output, output.Length);
+			String fileName = LIB.extractFileName (filePath);
+			receiveFile (fileName);
+
+
 	    }
 
-		/// <summary>
-		/// Receives the file.
-		/// </summary>
-		/// <param name='fileName'>
-		/// File name.
-		/// </param>
-		/// <param name='transport'>
-		/// Transportlaget
-		/// </param>
-		private void receiveFile (String fileName, Transport transport)
+		static byte[] GetBytes(string str)
 		{
-			// TO DO Your own code
+			byte[] bytes = new byte[str.Length * sizeof(char)];
+			System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+			return bytes;
+		}
+
+		private void receiveFile (String fileName)
+		{
+			byte[] input = new byte[BUFSIZE];
+			transportLayer.receive (ref input);
+			if(input[0] == (byte) 'E') {
+				return;
+			}
+			Console.Write ("Beginning receipt of file");
+			Array.Clear (input, 0, input.Length);
+			using (FileStream fs = new FileStream (fileName, FileMode.OpenOrCreate)) {
+				int size = transportLayer.receive (ref input);
+				while (size > 0) {
+					fs.Write (input, 0, size);
+					size = transportLayer.receive (ref input);
+				}
+			}
+
 		}
 
 		/// <summary>

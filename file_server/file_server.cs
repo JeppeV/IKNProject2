@@ -8,42 +8,52 @@ namespace Application
 {
 	class file_server
 	{
-		/// <summary>
-		/// The BUFSIZE
-		/// </summary>
+
 		private const int BUFSIZE = 1000;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="file_server"/> class.
-		/// </summary>
+		private byte[] input;
+
+		private Transport transportLayer;
+
 		private file_server ()
 		{
-			// TO DO Your own code
-		}
+			transportLayer = new Transport (BUFSIZE);
+			input = new byte[BUFSIZE];
+			while (true) {
+				transportLayer.receive (ref input);
+				var fileName = System.Text.Encoding.Default.GetString(input);
+				int fileSize = LIB.check_File_Exists (fileName);
+				sendFile (fileName, fileSize);
+				Array.Clear (input, 0, input.Length);
+			
+			}
 
-		/// <summary>
-		/// Sends the file.
-		/// </summary>
-		/// <param name='fileName'>
-		/// File name.
-		/// </param>
-		/// <param name='fileSize'>
-		/// File size.
-		/// </param>
-		/// <param name='tl'>
-		/// Tl.
-		/// </param>
-		private void sendFile(String fileName, long fileSize, Transport transport)
+
+		}
+			
+		private void sendFile(String fileName, int fileSize)
 		{
-			// TO DO Your own code
+			byte[] output = new byte[BUFSIZE];
+			if (fileSize > 0) {
+				output [0] = (byte)'K';
+				transportLayer.send (output, 1);
+			} else {
+				output [0] = (byte)'E';
+				transportLayer.send (output, 1);
+				return;
+			}
+
+			using (FileStream fs = File.Open (fileName, FileMode.Open)) {
+				Array.Clear (output, 0, output.Length);
+				int bytesRead = fs.Read (output, 0, BUFSIZE);
+				while(bytesRead > 0){
+					transportLayer.send (output, bytesRead);
+					Array.Clear (output, 0, output.Length);
+					bytesRead = fs.Read (output, 0, BUFSIZE);
+				}
+			}
 		}
 
-		/// <summary>
-		/// The entry point of the program, where the program control starts and ends.
-		/// </summary>
-		/// <param name='args'>
-		/// The command-line arguments.
-		/// </param>
 		public static void Main (string[] args)
 		{
 			new file_server();

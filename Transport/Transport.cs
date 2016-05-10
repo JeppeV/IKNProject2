@@ -112,7 +112,6 @@ namespace Transportlaget
 				link.send (sendBuffer, sendBuffer.Length);
 			}
 
-
 		}
 			
 
@@ -131,6 +130,7 @@ namespace Transportlaget
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
 			}
+			Array.Copy (receiveBuffer, buf, receiveBuffer.Length);
 			sendAck (true);
 			return size;
 		}
