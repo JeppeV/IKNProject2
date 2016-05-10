@@ -103,10 +103,10 @@ namespace Transportlaget
 		public void send(byte[] buf, int size)
 		{
 			byte[] sendBuffer = new byte[size + 4];
-			sendBuffer [TransCHKSUM.SEQNO] = seqNo++;
-			sendBuffer [TransCHKSUM.TYPE] = TransType.DATA;
+			sendBuffer [(int)TransCHKSUM.SEQNO] = seqNo++;
+			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
 			Array.Copy (buf, 0, sendBuffer, 4, size);
-			checksum.calcChecksum (sendBuffer, sendBuffer.Length);
+			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
 			link.send (sendBuffer, sendBuffer.Length);
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);

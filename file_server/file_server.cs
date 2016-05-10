@@ -22,7 +22,7 @@ namespace Application
 			while (true) {
 				transportLayer.receive (ref input);
 				var fileName = System.Text.Encoding.Default.GetString(input);
-				int fileSize = LIB.check_File_Exists (fileName);
+				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
 				Array.Clear (input, 0, input.Length);
 			
