@@ -22,7 +22,7 @@ namespace Application
 	    {
 			transportLayer = new Transport (BUFSIZE);
 			String filePath = args [0];
-			output = Encoding.ASCII.GetBytes(output);
+			output = Encoding.Default.GetBytes(filePath);
 			Console.WriteLine ("filePath: " + System.Text.Encoding.Default.GetString(output));
 			transportLayer.send (output, output.Length);
 			Console.WriteLine ("filename sent to server");
