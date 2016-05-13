@@ -26,7 +26,7 @@ namespace Application
 
 				var fileName = encoding.GetString(input);
 				var stringArr = fileName.Split ('=');
-				fileName = stringArr [stringArr.Length - 1];
+				fileName = stringArr [stringArr.Length - 1].Trim();
 				Console.WriteLine ("received filename from client " + fileName );
 
 				int fileSize = (int)LIB.check_File_Exists (fileName);
