@@ -137,7 +137,7 @@ namespace Transportlaget
 			byte[] receiveBuffer = new byte[buf.Length];
 			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
-
+			Console.WriteLine ("Transport: Received item with size: " + size);
 			while (size <= 0 || !checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
