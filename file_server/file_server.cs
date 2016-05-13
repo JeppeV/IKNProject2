@@ -42,12 +42,12 @@ namespace Application
 			byte[] output = new byte[BUFSIZE];
 			if (fileSize > 0) {
 				Console.WriteLine ("file found, sending K");
-				output [0] = Convert.ToByte('K');
-				transportLayer.send (output, 1);
+				output [0] = (byte)'K';
+				transportLayer.send (output, output.Length);
 			} else {
 				Console.WriteLine ("file not found, sending E");
-				output [0] = Convert.ToByte('E');
-				transportLayer.send (output, 1);
+				output [0] = (byte)'E';
+				transportLayer.send (output, output.Length);
 				return;
 			}
 			Console.WriteLine ("sending file to client");
