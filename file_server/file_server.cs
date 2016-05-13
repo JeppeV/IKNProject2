@@ -25,10 +25,9 @@ namespace Application
 				transportLayer.receive (ref input);
 
 				var fileName = encoding.GetString(input);
-				var stringArr = fileName.Split ('=');
-				fileName = stringArr [stringArr.Length - 1].Trim();
-				Console.WriteLine ("received filename from client " + fileName );
 
+				fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
+				Console.WriteLine ("received filename from client " + fileName );
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
 				Array.Clear (input, 0, input.Length);
@@ -43,11 +42,11 @@ namespace Application
 			byte[] output = new byte[BUFSIZE];
 			if (fileSize > 0) {
 				Console.WriteLine ("file found, sending K");
-				output [0] = (byte)'K';
+				output [0] = Convert.ToByte('K');
 				transportLayer.send (output, 1);
 			} else {
 				Console.WriteLine ("file not found, sending E");
-				output [0] = (byte)'E';
+				output [0] = Convert.ToByte('E');
 				transportLayer.send (output, 1);
 				return;
 			}

@@ -22,7 +22,7 @@ namespace Application
 	    {
 			System.Text.Encoding encoding = System.Text.Encoding.UTF8;
 			transportLayer = new Transport (BUFSIZE);
-			String filePath = args [0];
+			string filePath = args [0];
 			output = encoding.GetBytes(filePath);
 			Console.WriteLine ("filePath: " + encoding.GetString(output));
 			transportLayer.send (output, output.Length);
@@ -44,10 +44,11 @@ namespace Application
 		{
 			byte[] input = new byte[BUFSIZE];
 			transportLayer.receive (ref input);
-			if(input[0] == (byte) 'E') {
+			Console.WriteLine ("Status message: " + Encoding.UTF8.GetString(output));
+			if(input[0] == Convert.ToByte('E')) {
 				return;
 			}
-			Console.Write ("Beginning receipt of file");
+			Console.WriteLine ("Beginning receipt of file");
 			Array.Clear (input, 0, input.Length);
 			using (FileStream fs = new FileStream (fileName, FileMode.OpenOrCreate)) {
 				int size = transportLayer.receive (ref input);
