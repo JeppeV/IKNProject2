@@ -40,6 +40,7 @@ namespace Linklaget
 			serialPort.ReadTimeout = 10000;
 			serialPort.DiscardInBuffer ();
 			serialPort.DiscardOutBuffer ();
+
 		}
 
 		/// <summary>
@@ -53,6 +54,7 @@ namespace Linklaget
 		/// </param>
 		public void send (byte[] buf, int size)
 		{
+			serialPort.DiscardOutBuffer ();
 
 			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
@@ -128,6 +130,7 @@ namespace Linklaget
 
 
 			}
+			serialPort.DiscardInBuffer ();
 			//Console.WriteLine ("Link: Received item: " + System.Text.Encoding.Default.GetString(buffer));
 			Console.WriteLine ("Link: Received item with size: " + j);
 			return j;
