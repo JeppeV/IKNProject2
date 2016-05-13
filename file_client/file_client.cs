@@ -24,6 +24,7 @@ namespace Application
 			String filePath = args [0];
 			output = GetBytes (filePath);
 			transportLayer.send (output, output.Length);
+			Console.Write ("filename sent to server");
 			String fileName = LIB.extractFileName (filePath);
 			receiveFile (fileName);
 

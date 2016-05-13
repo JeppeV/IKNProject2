@@ -81,7 +81,7 @@ namespace Transportlaget
 		/// Ack type.
 		/// </param>
 		private void sendAck (bool ackType)
-		{
+		{	
 			byte[] ackBuf = new byte[(int)TransSize.ACKSIZE];
 			ackBuf [(int)TransCHKSUM.SEQNO] = (byte)
 					(ackType ? (byte)buffer [(int)TransCHKSUM.SEQNO] : (byte)(buffer [(int)TransCHKSUM.SEQNO] + 1) % 2);
@@ -107,9 +107,13 @@ namespace Transportlaget
 			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
 			Array.Copy (buf, 0, sendBuffer, 4, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
+			Console.WriteLine ("Transport: Sending item");
 			link.send (sendBuffer, sendBuffer.Length);
+			Console.WriteLine ("Transport: Item sent");
 			while (!receiveAck ()) {
+				Console.WriteLine ("Transport: reSending item");
 				link.send (sendBuffer, sendBuffer.Length);
+				Console.WriteLine ("Transport: Item reSent");
 			}
 
 		}

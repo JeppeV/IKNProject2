@@ -24,7 +24,7 @@ namespace Application
 				transportLayer.receive (ref input);
 
 				var fileName = System.Text.Encoding.Default.GetString(input);
-				Console.Write ("received filename from client " + filename);
+				Console.Write ("received filename from client " + fileName);
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
 				Array.Clear (input, 0, input.Length);
