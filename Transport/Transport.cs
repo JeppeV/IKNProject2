@@ -137,14 +137,15 @@ namespace Transportlaget
 			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
 
-			while (!checksum.checkChecksum (receiveBuffer, size)) {
+			while (size <= 0 || !checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
 			}
+
 			Array.Copy (receiveBuffer, buf, receiveBuffer.Length);
 			sendAck (true);
-			Console.WriteLine ("Transport: Item successfully received");
+			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			return size;
 		}
