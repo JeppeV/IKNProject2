@@ -1,5 +1,5 @@
 /root/Desktop/IKNProject2/Link/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
-/root/Desktop/IKNProject2/Link/obj/Debug/Link.dll
 /root/Desktop/IKNProject2/Link/bin/Debug/Link.dll.mdb
 /root/Desktop/IKNProject2/Link/bin/Debug/Link.dll
+/root/Desktop/IKNProject2/Link/obj/Debug/Link.dll
 /root/Desktop/IKNProject2/Link/obj/Debug/Link.dll.mdb
