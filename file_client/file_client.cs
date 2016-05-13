@@ -23,8 +23,9 @@ namespace Application
 			transportLayer = new Transport (BUFSIZE);
 			String filePath = args [0];
 			output = GetBytes (filePath);
+			Console.WriteLine ("filePath: " + System.Text.Encoding.Default.GetString(output));
 			transportLayer.send (output, output.Length);
-			Console.Write ("filename sent to server");
+			Console.WriteLine ("filename sent to server");
 			String fileName = LIB.extractFileName (filePath);
 			receiveFile (fileName);
 

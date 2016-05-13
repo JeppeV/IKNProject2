@@ -113,6 +113,7 @@ namespace Transportlaget
 			Array.Copy (buf, 0, sendBuffer, 4, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Sending item");
+			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(sendBuffer));
 			link.send (sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Item sent");
 			while (!receiveAck ()) {
@@ -144,6 +145,7 @@ namespace Transportlaget
 			Array.Copy (receiveBuffer, buf, receiveBuffer.Length);
 			sendAck (true);
 			Console.WriteLine ("Transport: Item successfully received");
+			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			return size;
 		}
 	}
