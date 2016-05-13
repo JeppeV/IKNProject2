@@ -23,7 +23,7 @@ namespace Application
 				Console.WriteLine ("awaiting filename from client");
 				transportLayer.receive (ref input);
 
-				var fileName = System.Text.Encoding.Default.GetString(input);
+				var fileName = System.Text.Encoding.ASCII.GetString(input);
 				Console.WriteLine ("received filename from client " + fileName);
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
