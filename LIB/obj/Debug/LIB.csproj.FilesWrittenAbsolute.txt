@@ -1,0 +1,6 @@
+/root/Desktop/IKNProject2/LIB/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/root/Desktop/IKNProject2/LIB/bin/Debug/LIB.dll.mdb
+/root/Desktop/IKNProject2/LIB/bin/Debug/LIB.dll
+/root/Desktop/IKNProject2/LIB/obj/Debug/LIB.dll
+/root/Desktop/IKNProject2/LIB/obj/Debug/LIB.dll.mdb
+/root/Desktop/IKNProject2/LIB/bin/Debug/System.dll
