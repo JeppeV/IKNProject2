@@ -132,7 +132,6 @@ namespace Linklaget
 			}
 			serialPort.DiscardInBuffer ();
 			//Console.WriteLine ("Link: Received item: " + System.Text.Encoding.Default.GetString(buffer));
-			Console.WriteLine ("Link: Received item with size: " + j);
 			return j;
 
 		}
