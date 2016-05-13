@@ -17,13 +17,14 @@ namespace Application
 
 		private file_server ()
 		{
+			System.Text.Encoding encoding = System.Text.Encoding.UTF8;
 			transportLayer = new Transport (BUFSIZE);
 			input = new byte[BUFSIZE];
 			while (true) {
 				Console.WriteLine ("awaiting filename from client");
 				transportLayer.receive (ref input);
 
-				var fileName = System.Text.Encoding.ASCII.GetString(input);
+				var fileName = encoding.GetString(input);
 				Console.WriteLine ("received filename from client " + fileName);
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);

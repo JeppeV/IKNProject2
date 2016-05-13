@@ -53,7 +53,7 @@ namespace Linklaget
 		/// </param>
 		public void send (byte[] buf, int size)
 		{
-			Console.WriteLine ("Link: Sending item: " + System.Text.Encoding.Default.GetString(buf));
+			//Console.WriteLine ("Link: Sending item: " + System.Text.Encoding.Default.GetString(buf));
 			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
 			char c;
@@ -73,7 +73,7 @@ namespace Linklaget
 				}
 			}
 			buffer [j] = DELIMITER;
-			Console.WriteLine ("Link: Sending item with byte stuffing: " + System.Text.Encoding.Default.GetString(buffer));
+			//Console.WriteLine ("Link: Sending item with byte stuffing: " + System.Text.Encoding.Default.GetString(buffer));
 			serialPort.Write (buffer, 0, buffer.Length);
 			
 		}
@@ -89,7 +89,7 @@ namespace Linklaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			Console.WriteLine ("Link: Receiving item with byte stuffing: " + System.Text.Encoding.Default.GetString(buf));
+			//Console.WriteLine ("Link: Receiving item with byte stuffing: " + System.Text.Encoding.Default.GetString(buf));
 			Array.Clear (buffer, 0, buffer.Length);
 			int j = 0;
 			char c = Convert.ToChar((byte)serialPort.ReadByte ());
@@ -127,7 +127,7 @@ namespace Linklaget
 
 
 			}
-			Console.WriteLine ("Link: Received item: " + System.Text.Encoding.Default.GetString(buffer));
+			//Console.WriteLine ("Link: Received item: " + System.Text.Encoding.Default.GetString(buffer));
 			return j;
 
 		}

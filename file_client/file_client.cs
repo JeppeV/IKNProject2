@@ -20,10 +20,11 @@ namespace Application
 
 	    private file_client(String[] args)
 	    {
+			System.Text.Encoding encoding = System.Text.Encoding.UTF8;
 			transportLayer = new Transport (BUFSIZE);
 			String filePath = args [0];
-			output = Encoding.ASCII.GetBytes(filePath);
-			Console.WriteLine ("filePath: " + System.Text.Encoding.Default.GetString(output));
+			output = encoding.GetBytes(filePath);
+			Console.WriteLine ("filePath: " + encoding.GetString(output));
 			transportLayer.send (output, output.Length);
 			Console.WriteLine ("filename sent to server");
 			String fileName = LIB.extractFileName (filePath);
