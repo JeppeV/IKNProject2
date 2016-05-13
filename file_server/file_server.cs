@@ -25,7 +25,10 @@ namespace Application
 				transportLayer.receive (ref input);
 
 				var fileName = encoding.GetString(input);
-				Console.WriteLine ("received filename from client " + fileName);
+				var stringArr = fileName.Split ('=');
+				fileName = stringArr [stringArr.Length - 1];
+				Console.WriteLine ("received filename from client " + fileName );
+
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
 				Array.Clear (input, 0, input.Length);
