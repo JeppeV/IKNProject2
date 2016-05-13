@@ -53,6 +53,7 @@ namespace Linklaget
 		/// </param>
 		public void send (byte[] buf, int size)
 		{
+
 			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
 			char c;
@@ -72,6 +73,7 @@ namespace Linklaget
 				}
 			}
 			buffer [j] = DELIMITER;
+
 			//Console.WriteLine ("Link: Sending item with byte stuffing: " + System.Text.Encoding.Default.GetString(buffer));
 			serialPort.Write (buffer, 0, buffer.Length);
 			
@@ -127,6 +129,7 @@ namespace Linklaget
 
 			}
 			//Console.WriteLine ("Link: Received item: " + System.Text.Encoding.Default.GetString(buffer));
+			Console.WriteLine ("Link: Received item with size: " + j);
 			return j;
 
 		}

@@ -43,11 +43,11 @@ namespace Application
 			if (fileSize > 0) {
 				Console.WriteLine ("file found, sending K");
 				output [0] = (byte)'K';
-				transportLayer.send (output, output.Length);
+				transportLayer.send (output, 1);
 			} else {
 				Console.WriteLine ("file not found, sending E");
 				output [0] = (byte)'E';
-				transportLayer.send (output, output.Length);
+				transportLayer.send (output, 1);
 				return;
 			}
 			Console.WriteLine ("sending file to client");

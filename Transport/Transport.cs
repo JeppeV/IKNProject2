@@ -116,12 +116,12 @@ namespace Transportlaget
 			Console.WriteLine ("Transport: Sending item");
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(sendBuffer));
 			link.send (sendBuffer, sendBuffer.Length);
-			Console.WriteLine ("Transport: Item sent");
+			Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(sendBuffer));
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);
 
 			}
-			Console.WriteLine ("Transport: Item succesfully sent");
+			Console.WriteLine ("Transport: Item succesfully sent with size: ");
 
 		}
 			

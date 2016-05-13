@@ -40,7 +40,7 @@ namespace Application
 			byte[] input = new byte[BUFSIZE];
 			transportLayer.receive (ref input);
 			Console.WriteLine ("Status message: " + Encoding.UTF8.GetString(output));
-			if(input[0] == Convert.ToByte('E')) {
+			if(input[0] == (byte)'E') {
 				return;
 			}
 			Console.WriteLine ("Beginning receipt of file");
