@@ -121,7 +121,7 @@ namespace Transportlaget
 				link.send (sendBuffer, sendBuffer.Length);
 
 			}
-			Console.WriteLine ("Transport: Item succesfully sent with size: ");
+			Console.WriteLine ("Transport: Item succesfully sent with size: " + size);
 
 		}
 			
