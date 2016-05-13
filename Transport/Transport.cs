@@ -61,8 +61,11 @@ namespace Transportlaget
 		/// </returns>
 		private bool receiveAck()
 		{
+
 			byte[] buf = new byte[(int)TransSize.ACKSIZE];
+			Console.WriteLine ("Transport: Receiving ack");
 			int size = link.receive(ref buf);
+
 			if (size != (int)TransSize.ACKSIZE) return false;
 			if(!checksum.checkChecksum(buf, (int)TransSize.ACKSIZE) ||
 					buf[(int)TransCHKSUM.SEQNO] != seqNo ||
@@ -70,7 +73,7 @@ namespace Transportlaget
 				return false;
 			
 			seqNo = (byte)((buf[(int)TransCHKSUM.SEQNO] + 1) % 2);
-			
+			Console.WriteLine ("Transport: received ack is true");
 			return true;
 		}
 
@@ -82,6 +85,7 @@ namespace Transportlaget
 		/// </param>
 		private void sendAck (bool ackType)
 		{	
+			Console.WriteLine ("Transport: Sending ack...");
 			byte[] ackBuf = new byte[(int)TransSize.ACKSIZE];
 			ackBuf [(int)TransCHKSUM.SEQNO] = (byte)
 					(ackType ? (byte)buffer [(int)TransCHKSUM.SEQNO] : (byte)(buffer [(int)TransCHKSUM.SEQNO] + 1) % 2);
@@ -89,6 +93,7 @@ namespace Transportlaget
 			checksum.calcChecksum (ref ackBuf, (int)TransSize.ACKSIZE);
 
 			link.send(ackBuf, (int)TransSize.ACKSIZE);
+			Console.WriteLine ("Transport: Ack sent: " + ackType);
 		}
 
 		/// <summary>

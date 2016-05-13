@@ -3,14 +3,28 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Transport/Transport.cs">
     <Files>
       <File FileName="file_server/file_server.cs" Line="22" Column="22" />
-      <File FileName="Transport/Transport.cs" Line="7" Column="7" />
-      <File FileName="file_client/file_client.cs" Line="48" Column="48" />
-      <File FileName="Link/Link.cs" Line="13" Column="13" />
-      <File FileName="LIB/LIB.cs" Line="1" Column="1" />
+      <File FileName="file_client/file_client.cs" Line="20" Column="20" />
+      <File FileName="Transport/Transport.cs" Line="2" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.file__client>
+    <MonoDevelop.Ide.CustomExecutionModes>
+      <Data Name="hej" Id="f4dfa91c-8e7d-45a9-8164-3665fbfc9202" ModeId="Default">
+        <CommandData>
+          <Item Key="MonoDevelop.Ide.Execution.CustomArgsCustomizer">
+            <Value Arguments="&quot;test.txt&quot;" ctype="CustomArgsExecutionModeData">
+              <EnvironmentVariables />
+            </Value>
+          </Item>
+          <Item Key="MonoDevelop.Ide.Execution.MonoExecutionCustomizer">
+            <Value ctype="MonoExecutionParameters" />
+          </Item>
+        </CommandData>
+      </Data>
+    </MonoDevelop.Ide.CustomExecutionModes>
+  </MonoDevelop.Ide.ItemProperties.file__client>
 </Properties>
