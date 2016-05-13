@@ -1,32 +1,20 @@
 using System;
 using System.IO.Ports;
 
-/// <summary>
-/// Link.
-/// </summary>
+
 namespace Linklaget
 {
-	/// <summary>
-	/// Link.
-	/// </summary>
+
 	public class Link
 	{
-		/// <summary>
-		/// The DELIMITE for slip protocol.
-		/// </summary>
+
 		const byte DELIMITER = (byte)'A';
-		/// <summary>
-		/// The buffer for link.
-		/// </summary>
+
 		private byte[] buffer;
-		/// <summary>
-		/// The serial port.
-		/// </summary>
+
 		SerialPort serialPort;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="link"/> class.
-		/// </summary>
+
 		public Link (int BUFSIZE)
 		{
 			// Create a new SerialPort object with default settings.
@@ -43,15 +31,7 @@ namespace Linklaget
 
 		}
 
-		/// <summary>
-		/// Send the specified buf and size.
-		/// </summary>
-		/// <param name='buf'>
-		/// Buffer.
-		/// </param>
-		/// <param name='size'>
-		/// Size.
-		/// </param>
+
 		public void send (byte[] buf, int size)
 		{
 			serialPort.DiscardOutBuffer ();
@@ -81,15 +61,6 @@ namespace Linklaget
 			
 		}
 
-		/// <summary>
-		/// Receive the specified buf and size.
-		/// </summary>
-		/// <param name='buf'>
-		/// Buffer.
-		/// </param>
-		/// <param name='size'>
-		/// Size.
-		/// </param>
 		public int receive (ref byte[] buf)
 		{
 			//Console.WriteLine ("Link: Receiving item with byte stuffing: " + System.Text.Encoding.Default.GetString(buf));
@@ -131,7 +102,6 @@ namespace Linklaget
 
 			}
 			serialPort.DiscardInBuffer ();
-			//Console.WriteLine ("Link: Received item: " + System.Text.Encoding.Default.GetString(buffer));
 			return j;
 
 		}
