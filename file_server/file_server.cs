@@ -20,11 +20,11 @@ namespace Application
 			transportLayer = new Transport (BUFSIZE);
 			input = new byte[BUFSIZE];
 			while (true) {
-				Console.Write ("awaiting filename from client");
+				Console.WriteLine ("awaiting filename from client");
 				transportLayer.receive (ref input);
 
 				var fileName = System.Text.Encoding.Default.GetString(input);
-				Console.Write ("received filename from client " + fileName);
+				Console.WriteLine ("received filename from client " + fileName);
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
 				Array.Clear (input, 0, input.Length);
@@ -45,7 +45,7 @@ namespace Application
 				transportLayer.send (output, 1);
 				return;
 			}
-			Console.Write ("sending file to client");
+			Console.WriteLine ("sending file to client");
 
 			using (FileStream fs = File.Open (fileName, FileMode.Open)) {
 				Array.Clear (output, 0, output.Length);

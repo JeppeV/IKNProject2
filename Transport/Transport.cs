@@ -111,10 +111,10 @@ namespace Transportlaget
 			link.send (sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Item sent");
 			while (!receiveAck ()) {
-				Console.WriteLine ("Transport: reSending item");
 				link.send (sendBuffer, sendBuffer.Length);
-				Console.WriteLine ("Transport: Item reSent");
+
 			}
+			Console.WriteLine ("Transport: Item succesfully sent");
 
 		}
 			
@@ -128,7 +128,9 @@ namespace Transportlaget
 		public int receive (ref byte[] buf)
 		{
 			byte[] receiveBuffer = new byte[buf.Length];
+			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
+
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
@@ -136,6 +138,7 @@ namespace Transportlaget
 			}
 			Array.Copy (receiveBuffer, buf, receiveBuffer.Length);
 			sendAck (true);
+			Console.WriteLine ("Transport: Item successfully received");
 			return size;
 		}
 	}
