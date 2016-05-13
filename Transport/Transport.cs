@@ -63,7 +63,7 @@ namespace Transportlaget
 		{
 
 			byte[] buf = new byte[(int)TransSize.ACKSIZE];
-			Console.WriteLine ("Transport: Receiving ack");
+			//Console.WriteLine ("Transport: Receiving ack");
 			int size = link.receive(ref buf);
 
 			if (size != (int)TransSize.ACKSIZE) return false;
@@ -108,7 +108,7 @@ namespace Transportlaget
 		public void send(byte[] buf, int size)
 		{
 			byte[] sendBuffer = new byte[size + 4];
-			sendBuffer [(int)TransCHKSUM.SEQNO] = seqNo++;
+			sendBuffer [(int)TransCHKSUM.SEQNO] = seqNo;
 			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
 			Array.Copy (buf, 0, sendBuffer, 4, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
