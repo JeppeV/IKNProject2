@@ -11,54 +11,34 @@ namespace Transportlaget
 	/// </summary>
 	public class Transport
 	{
-		/// <summary>
-		/// The link.
-		/// </summary>
+
 		private Link link;
-		/// <summary>
-		/// The 1' complements checksum.
-		/// </summary>
+
 		private Checksum checksum;
-		/// <summary>
-		/// The buffer.
-		/// </summary>
-		private byte[] buffer;
-		/// <summary>
-		/// The seq no.
-		/// </summary>
+
+		private byte[] inputBuffer;
+
 		private byte seqNo;
-		/// <summary>
-		/// The old_seq no.
-		/// </summary>
+
 		private byte old_seqNo;
-		/// <summary>
-		/// The error count.
-		/// </summary>
+
 		private int errorCount;
-		/// <summary>
-		/// The DEFAULT_SEQNO.
-		/// </summary>
+
 		private const int DEFAULT_SEQNO = 2;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Transport"/> class.
-		/// </summary>
+		private int BUFSIZE;
+
 		public Transport (int BUFSIZE)
 		{
+			this.BUFSIZE = BUFSIZE;
 			link = new Link(BUFSIZE+(int)TransSize.ACKSIZE);
 			checksum = new Checksum();
-			buffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
+			inputBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			seqNo = 0;
 			old_seqNo = DEFAULT_SEQNO;
 			errorCount = 0;
 		}
 
-		/// <summary>
-		/// Receives the ack.
-		/// </summary>
-		/// <returns>
-		/// The ack.
-		/// </returns>
 		private bool receiveAck()
 		{
 
@@ -78,18 +58,11 @@ namespace Transportlaget
 			return true;
 		}
 
-		/// <summary>
-		/// Sends the ack.
-		/// </summary>
-		/// <param name='ackType'>
-		/// Ack type.
-		/// </param>
-		private void sendAck (bool ackType)
+
+		private void sendAck (bool ackType, byte[] receiveBuffer)
 		{	
-			//Console.WriteLine ("Transport: Sending ack...");
 			byte[] ackBuf = new byte[(int)TransSize.ACKSIZE];
-			ackBuf [(int)TransCHKSUM.SEQNO] = (byte)
-					(ackType ? (byte)buffer [(int)TransCHKSUM.SEQNO] : (byte)(buffer [(int)TransCHKSUM.SEQNO] + 1) % 2);
+			ackBuf [(int)TransCHKSUM.SEQNO] = (byte) (ackType ? (byte)receiveBuffer [(int)TransCHKSUM.SEQNO] : (byte)(receiveBuffer [(int)TransCHKSUM.SEQNO] + 1) % 2);
 			ackBuf [(int)TransCHKSUM.TYPE] = (byte)(int)TransType.ACK;
 			checksum.calcChecksum (ref ackBuf, (int)TransSize.ACKSIZE);
 
@@ -97,17 +70,9 @@ namespace Transportlaget
 			//Console.WriteLine ("Transport: Ack sent: " + ackType);
 		}
 
-		/// <summary>
-		/// Send the specified buffer and size.
-		/// </summary>
-		/// <param name='buffer'>
-		/// Buffer.
-		/// </param>
-		/// <param name='size'>
-		/// Size.
-		/// </param>
 		public void send(byte[] buf, int size)
 		{
+
 			byte[] sendBuffer = new byte[size + 4];
 			sendBuffer [(int)TransCHKSUM.SEQNO] = seqNo;
 			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
@@ -126,26 +91,20 @@ namespace Transportlaget
 		}
 			
 
-		/// <summary>
-		/// Receive the specified buffer.
-		/// </summary>
-		/// <param name='buffer'>
-		/// Buffer.
-		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			byte[] receiveBuffer = new byte[buf.Length];
+			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
 			Console.WriteLine ("Transport: Received item with size: " + size);
 			while (size <= 0 || !checksum.checkChecksum (receiveBuffer, size)) {
-				sendAck (false);
+				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
 			}
 
 			Array.Copy (receiveBuffer, buf, receiveBuffer.Length);
-			sendAck (true);
+			sendAck (true, receiveBuffer);
 			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			return size;
