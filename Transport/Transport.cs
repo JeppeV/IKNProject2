@@ -113,6 +113,7 @@ namespace Transportlaget
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
 				count++;
+				Console.WriteLine ("Transport: Receive count: " + count);
 				if (count == 5) {
 					size = 0;
 					break;

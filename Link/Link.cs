@@ -62,12 +62,16 @@ namespace Linklaget
 		{
 			Array.Clear (buffer, 0, buffer.Length);
 			int j = 0;
-			char c = Convert.ToChar ((byte)serialPort.ReadByte ());
+
+
+			byte[] input = new byte[buffer.Length];
+			int bytesRead = serialPort.Read (input, 0, input.Length);
+			char c = Convert.ToChar (input[0]);
 			if (c == 'A') {
 				byte current;
 				int count = 0;
-				while (true) {
-					current = (byte) serialPort.ReadByte ();
+				for (int i = 1; i < bytesRead; i++) {
+					current = input [i];
 					c = Convert.ToChar (current);
 					if (c == 'A')
 						break;
