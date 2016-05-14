@@ -45,14 +45,16 @@ namespace Application
 			}
 			Console.WriteLine ("Beginning receipt of file");
 			Array.Clear (input, 0, input.Length);
-			using (FileStream fs = new FileStream (fileName, FileMode.OpenOrCreate)) {
+			using (FileStream fs = new FileStream ("test.txt", FileMode.OpenOrCreate)) {
 				int size = transportLayer.receive (ref input);
 				while (size > 0) {
 					fs.Write (input, 0, size);
 					Array.Clear (input, 0, input.Length);
 					size = transportLayer.receive (ref input);
 				}
+				fs.Close ();
 			}
+			Console.WriteLine ("Client received file");
 
 		}
 
