@@ -34,7 +34,7 @@ namespace Linklaget
 
 		public void send (byte[] buf, int size)
 		{
-		
+
 			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
 			char c;
@@ -54,7 +54,6 @@ namespace Linklaget
 				}
 			}
 			buffer [j] = DELIMITER;
-			Console.WriteLine ("Link: Attempting to send item of length: " + (j + 1));
 			serialPort.Write (buffer, 0, buffer.Length);
 			
 		}
@@ -79,7 +78,6 @@ namespace Linklaget
 				}
 
 				for (int i = 0; i < count; i++) {
-
 					current = buffer [i];
 					c = Convert.ToChar (current);
 					if (c == 'B') {

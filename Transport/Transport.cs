@@ -47,7 +47,6 @@ namespace Transportlaget
 			int size = link.receive(ref buf);
 
 			if (size != (int)TransSize.ACKSIZE) {
-				Console.WriteLine ("Transport: Acksize is not correct: " + size);
 				return false;
 			}
 			if (!checksum.checkChecksum (buf, (int)TransSize.ACKSIZE) ||
