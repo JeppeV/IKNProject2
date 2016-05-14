@@ -49,6 +49,7 @@ namespace Application
 				int size = transportLayer.receive (ref input);
 				while (size > 0) {
 					fs.Write (input, 0, size);
+					Array.Clear (input, 0, input.Length);
 					size = transportLayer.receive (ref input);
 				}
 			}
