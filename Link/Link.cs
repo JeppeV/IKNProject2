@@ -35,8 +35,6 @@ namespace Linklaget
 		public void send (byte[] buf, int size)
 		{
 		
-			serialPort.DiscardOutBuffer ();
-
 			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
 			char c;
@@ -65,29 +63,28 @@ namespace Linklaget
 		{
 			Array.Clear (buffer, 0, buffer.Length);
 			int j = 0;
-			byte[] input = new byte[buffer.Length];
-			serialPort.Read (input, 0, input.Length);
-			char c = Convert.ToChar (input[0]);
+			char c = Convert.ToChar ((byte)serialPort.ReadByte ());
 			if (c == 'A') {
 				byte current;
 				int count = 0;
-				for (int i = 1; i < input.Length; i++) {
-					current = input [i];
+				while (true) {
+					current = (byte) serialPort.ReadByte ();
 					c = Convert.ToChar (current);
-					if (c == 'A') {
+					if (c == 'A')
 						break;
-					} else {
+					else {
 						buffer [count++] = current;
 					}
-				
+
 				}
 
-				for (int x = 0; x < count; x++) {
-					current = buffer [x];
+				for (int i = 0; i < count; i++) {
+
+					current = buffer [i];
 					c = Convert.ToChar (current);
 					if (c == 'B') {
-						x++;
-						current = buffer [x];
+						i++;
+						current = buffer [i];
 						c = Convert.ToChar (current);
 						if (c == 'C') {
 							buf[j++] = (byte)'A';
@@ -103,7 +100,6 @@ namespace Linklaget
 
 
 			}
-			serialPort.DiscardInBuffer ();
 			return j;
 
 		}
