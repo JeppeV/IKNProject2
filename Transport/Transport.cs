@@ -100,7 +100,7 @@ namespace Transportlaget
 			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
 			Console.WriteLine ("Transport: Attempting to receive item");
-			while (size <= 0 || !checksum.checkChecksum (receiveBuffer, size)) {
+			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
