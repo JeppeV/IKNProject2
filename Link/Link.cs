@@ -35,6 +35,7 @@ namespace Linklaget
 		public void send (byte[] buf, int size)
 		{
 		
+			serialPort.DiscardOutBuffer ();
 
 			Array.Clear (buffer, 0, buffer.Length);
 			byte current;
