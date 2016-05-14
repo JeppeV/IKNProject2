@@ -83,10 +83,17 @@ namespace Transportlaget
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Sending item");
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(sendBuffer));
+			int count = 0;
 			link.send (sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(sendBuffer));
+
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);
+				count++;
+				if (count == 5) {
+					size = 0;
+					break;
+				}
 
 			}
 			Console.WriteLine ("Transport: Item succesfully sent with size: " + size);
@@ -98,16 +105,22 @@ namespace Transportlaget
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			Console.WriteLine ("Transport: Receiving item");
+			int count = 0;
 			int size = link.receive(ref receiveBuffer);
 			Console.WriteLine ("Transport: Attempting to receive item");
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
+				count++;
+				if (count == 5) {
+					size = 0;
+					break;
+				}
 			}
 
 			Array.Copy (receiveBuffer, 4,  buf, 0, buf.Length);
-			sendAck (true, receiveBuffer);
+			if(size > 0) sendAck (true, receiveBuffer);
 			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			return size;
