@@ -103,7 +103,7 @@ namespace Transportlaget
 				size = link.receive (ref receiveBuffer);
 			}
 
-			Array.Copy (receiveBuffer, (int)TransSize.ACKSIZE,  buf, 0, receiveBuffer.Length);
+			Array.Copy (receiveBuffer, 4,  buf, 0, buf.Length);
 			sendAck (true, receiveBuffer);
 			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
