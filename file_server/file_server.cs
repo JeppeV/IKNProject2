@@ -20,8 +20,12 @@ namespace Application
 			System.Text.Encoding encoding = System.Text.Encoding.UTF8;
 			transportLayer = new Transport (BUFSIZE);
 			input = new byte[BUFSIZE];
+			int size = 0;
 			Console.WriteLine ("awaiting filename from client");
-			transportLayer.receive (ref input);
+			while (size == 0) {
+				size = transportLayer.receive (ref input);
+			}
+
 
 			var fileName = encoding.GetString(input);
 
