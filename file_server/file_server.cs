@@ -20,19 +20,16 @@ namespace Application
 			System.Text.Encoding encoding = System.Text.Encoding.UTF8;
 			transportLayer = new Transport (BUFSIZE);
 			input = new byte[BUFSIZE];
-			while (true) {
-				Console.WriteLine ("awaiting filename from client");
-				transportLayer.receive (ref input);
+			Console.WriteLine ("awaiting filename from client");
+			transportLayer.receive (ref input);
 
-				var fileName = encoding.GetString(input);
+			var fileName = encoding.GetString(input);
 
-				fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
-				Console.WriteLine ("received filename from client " + fileName );
-				int fileSize = (int)LIB.check_File_Exists (fileName);
-				sendFile (fileName, fileSize);
-				Array.Clear (input, 0, input.Length);
-			
-			}
+			fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
+			Console.WriteLine ("received filename from client " + fileName );
+			int fileSize = (int)LIB.check_File_Exists (fileName);
+			sendFile (fileName, fileSize);
+			Array.Clear (input, 0, input.Length);
 
 
 		}
