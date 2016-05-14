@@ -103,6 +103,7 @@ namespace Linklaget
 
 
 			}
+			serialPort.DiscardInBuffer ();
 			return j;
 
 		}
