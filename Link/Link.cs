@@ -80,8 +80,10 @@ namespace Linklaget
 					}
 
 				}
-
+				Console.WriteLine ("Link: Count is " + count);
+				Console.WriteLine ("Link: Size of buf is " + buf.Length);
 				for (int i = 0; i < count; i++) {
+					Console.WriteLine ("Link: j = " + j);
 					current = buffer [i];
 					c = Convert.ToChar (current);
 					if (c == 'B') {
@@ -100,8 +102,9 @@ namespace Linklaget
 				}
 
 
+
 			}
-			serialPort.DiscardInBuffer ();
+			//serialPort.DiscardInBuffer ();
 			return j;
 
 		}
