@@ -25,7 +25,7 @@ namespace Linklaget
 
 			buffer = new byte[(BUFSIZE*2)];
 
-			serialPort.ReadTimeout = 10000;
+			serialPort.ReadTimeout = 200;
 			serialPort.DiscardInBuffer ();
 			serialPort.DiscardOutBuffer ();
 
