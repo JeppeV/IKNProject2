@@ -25,6 +25,8 @@ namespace Transportlaget
 
 		public bool checkChecksum(byte[] buf, int size)
 		{
+			if (size <= 2)
+				return false;
 			byte[] buffer = new byte[size-2];
 
 			Array.Copy(buf, (int)TransSize.CHKSUMSIZE, buffer, 0, buffer.Length);

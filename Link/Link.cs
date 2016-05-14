@@ -65,7 +65,12 @@ namespace Linklaget
 
 
 			byte[] input = new byte[buffer.Length];
-			int bytesRead = serialPort.Read (input, 0, input.Length);
+			int bytesRead;
+			try{
+				bytesRead = serialPort.Read (input, 0, input.Length);
+			}catch(TimeoutException e){
+				return 0;
+			}
 			char c = Convert.ToChar (input[0]);
 			if (c == 'A') {
 				byte current;
