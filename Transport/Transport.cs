@@ -46,7 +46,10 @@ namespace Transportlaget
 			//Console.WriteLine ("Transport: Receiving ack");
 			int size = link.receive(ref buf);
 
-			if (size != (int)TransSize.ACKSIZE) return false;
+			if (size != (int)TransSize.ACKSIZE) {
+				Console.WriteLine ("Transport: Acksize is not correct: " + size);
+				return false;
+			}
 			if (!checksum.checkChecksum (buf, (int)TransSize.ACKSIZE) ||
 			   buf [(int)TransCHKSUM.SEQNO] != seqNo ||
 			   buf [(int)TransCHKSUM.TYPE] != (int)TransType.ACK) {
@@ -97,7 +100,7 @@ namespace Transportlaget
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
-			Console.WriteLine ("Transport: Received item with size: " + size);
+			Console.WriteLine ("Transport: Attempting to receive item");
 			while (size <= 0 || !checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
