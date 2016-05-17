@@ -93,6 +93,7 @@ namespace Transportlaget
 				link.send (sendBuffer, sendBuffer.Length);
 				errorCount++;
 				if (errorCount == 5) {
+					Console.WriteLine ("Transport: Timed out on receipt");
 					size = 0;
 					break;
 				}
