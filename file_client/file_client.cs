@@ -41,7 +41,7 @@ namespace Application
 			byte[] input = new byte[BUFSIZE];
 			transportLayer.receive (ref input);
 			Console.WriteLine ("Status message: " + encoding.GetString(input));
-			if(input[0] == (byte)'E') {
+			if(!(input[0] == (byte)'K')) {
 				return;
 			}
 			Console.WriteLine ("Beginning receipt of file");
