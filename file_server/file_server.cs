@@ -55,6 +55,7 @@ namespace Application
 			Console.WriteLine ("sending file to client");
 
 			using (FileStream fs = File.Open (fileName, FileMode.Open)) {
+				Console.WriteLine("Reading file from: " + fs.Name);
 				Array.Clear (output, 0, output.Length);
 				int bytesRead = fs.Read (output, 0, BUFSIZE);
 				while(bytesRead > 0){

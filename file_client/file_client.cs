@@ -46,8 +46,8 @@ namespace Application
 			}
 			Console.WriteLine ("Beginning receipt of file");
 			Array.Clear (input, 0, input.Length);
-			using (FileStream fs = new FileStream (Path.Combine(System.Environment.CurrentDirectory, "test.txt"), FileMode.OpenOrCreate)) {
-				Console.WriteLine("Filestream name: " + fs.Name);
+			using (FileStream fs = new FileStream (Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "test.txt"), FileMode.OpenOrCreate)) {
+				Console.WriteLine("Writing file to: " + fs.Name);
 				int size = transportLayer.receive (ref input);
 				while (size > 0) {
 					fs.Write (input, 0, size);
