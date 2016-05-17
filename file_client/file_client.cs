@@ -47,13 +47,18 @@ namespace Application
 			Console.WriteLine ("Beginning receipt of file");
 			Array.Clear (input, 0, input.Length);
 			using (FileStream fs = new FileStream (Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, fileName), FileMode.OpenOrCreate)) {
-				int size = transportLayer.receive (ref input);
-				while (size > 0) {
-					fs.Write (input, 0, size); 
-					Array.Clear (input, 0, input.Length);
-					size = transportLayer.receive (ref input);
+				try{
+					int size = transportLayer.receive (ref input);
+					while (size > 0) {
+						fs.Write (input, 0, size); 
+						Array.Clear (input, 0, input.Length);
+						size = transportLayer.receive (ref input);
+					}
+					fs.Flush ();
+				} catch(TimeoutException e){
+					
 				}
-				fs.Flush ();
+				
 			}
 			Console.WriteLine ("Client received file");
 
