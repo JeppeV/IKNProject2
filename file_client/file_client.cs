@@ -48,7 +48,7 @@ namespace Application
 			Array.Clear (input, 0, input.Length);
 			using (FileStream fs = new FileStream (Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, fileName), FileMode.OpenOrCreate)) {
 				int size = transportLayer.receive (ref input);
-				while (size >= 0) {
+				while (size > 0) {
 					fs.Write (input, 0, size); 
 					Array.Clear (input, 0, input.Length);
 					size = transportLayer.receive (ref input);
