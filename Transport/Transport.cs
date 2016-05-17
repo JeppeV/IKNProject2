@@ -97,7 +97,7 @@ namespace Transportlaget
 
 			}
 			if (errorCount != 5) {
-				Console.WriteLine ("Transport: Item succesfully sent with size: " + size);
+				return;
 			} else {
 				Console.WriteLine ("Transport: Timed out on sending item");
 				throw new TimeoutException ();
@@ -110,12 +110,10 @@ namespace Transportlaget
 		public int receive (ref byte[] buf)
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
-			Console.WriteLine ("Transport: Receiving item");
 			int size = link.receive(ref receiveBuffer);
 			int errorCount = 0;
-			Console.WriteLine ("Transport: Attempting to receive item");
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
-				Console.WriteLine ("Size of received item is " + size + ", checksum was wrong.");
+				if (size > 0) Console.WriteLine ("Size of received item is " + size + ", checksum was wrong.");
 
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
@@ -128,8 +126,6 @@ namespace Transportlaget
 				sendAck (true, receiveBuffer);
 				size -= headerSize;
 			}
-			Console.WriteLine ("Transport: Item successfully received with size: " + size);
-			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			return size;
 		}
 	}

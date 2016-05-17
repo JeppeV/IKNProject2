@@ -54,7 +54,6 @@ namespace Linklaget
 				}
 			}
 			buffer [j++] = DELIMITER;
-			Console.WriteLine ("Link: Sent item of size " + j);
 			serialPort.Write (buffer, 0, j);
 			
 		}
