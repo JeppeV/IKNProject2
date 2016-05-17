@@ -110,19 +110,12 @@ namespace Transportlaget
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			Console.WriteLine ("Transport: Receiving item");
-			int errorCount = 0;
 			int size = link.receive(ref receiveBuffer);
 			Console.WriteLine ("Transport: Attempting to receive item");
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
-				errorCount++;
-				if (errorCount == 5) {
-					size = 0;
-					Console.WriteLine ("Transport: Timed out on receiving item");
-					break;
-				}
 			}
 
 			Array.Copy (receiveBuffer, headerSize,  buf, 0, buf.Length);
