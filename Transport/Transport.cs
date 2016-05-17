@@ -123,7 +123,7 @@ namespace Transportlaget
 			if(size > 0) sendAck (true, receiveBuffer);
 			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
-			return size;
+			return size - 4;
 		}
 	}
 }
