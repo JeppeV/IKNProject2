@@ -54,13 +54,11 @@ namespace Transportlaget
 			if (!checksum.checkChecksum (buf, (int)TransSize.ACKSIZE) ||
 			   buf [(int)TransCHKSUM.SEQNO] != seqNo ||
 			   buf [(int)TransCHKSUM.TYPE] != (int)TransType.ACK) {
-				Console.WriteLine ("Transport: received ack is false");
 				return false;
 			}
 				
 			
 			seqNo = (byte)((buf[(int)TransCHKSUM.SEQNO] + 1) % 2);
-			Console.WriteLine ("Transport: received ack is true");
 			return true;
 		}
 
