@@ -24,6 +24,8 @@ namespace Transportlaget
 
 		private int errorCount;
 
+		private const int headerSize = 4
+
 		private const int DEFAULT_SEQNO = 2;
 
 		private int BUFSIZE;
@@ -76,21 +78,21 @@ namespace Transportlaget
 		public void send(byte[] buf, int size)
 		{
 
-			byte[] sendBuffer = new byte[size + 4];
+			byte[] sendBuffer = new byte[size + headerSize];
 			sendBuffer [(int)TransCHKSUM.SEQNO] = seqNo;
 			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
-			Array.Copy (buf, 0, sendBuffer, 4, size);
+			Array.Copy (buf, 0, sendBuffer, headerSize, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Sending item");
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
-			int count = 0;
+			int errorCount = 0;
 			link.send (sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(buf));
 
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);
-				count++;
-				if (count == 5) {
+				errorCount++;
+				if (errorCount == 5) {
 					size = 0;
 					break;
 				}
@@ -105,15 +107,15 @@ namespace Transportlaget
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			Console.WriteLine ("Transport: Receiving item");
-			int count = 0;
+			int errorCount = 0;
 			int size = link.receive(ref receiveBuffer);
 			Console.WriteLine ("Transport: Attempting to receive item");
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
-				count++;
-				if (count == 5) {
+				errorCount++;
+				if (errorCount == 5) {
 					size = 0;
 					break;
 				}
