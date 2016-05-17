@@ -27,9 +27,9 @@ namespace Application
 			}
 
 
-			var fileName = encoding.GetString(input);
+			var fileName = System.Text.Encoding.Default.GetString (input);
 
-			fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
+			//fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
 			Console.WriteLine ("received filename from client " + fileName );
 			int fileSize = (int)LIB.check_File_Exists (fileName);
 			sendFile (fileName, fileSize);

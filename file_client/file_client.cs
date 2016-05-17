@@ -17,10 +17,12 @@ namespace Application
 
 		private Transport transportLayer;
 
+		private System.Text.Encoding encoding = System.Text.Encoding.Default;
+
 
 	    private file_client(String[] args)
 	    {
-			System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+
 			transportLayer = new Transport (BUFSIZE);
 			string filePath = args [0];
 			output = encoding.GetBytes(filePath);
@@ -39,7 +41,7 @@ namespace Application
 		{
 			byte[] input = new byte[BUFSIZE];
 			transportLayer.receive (ref input);
-			Console.WriteLine ("Status message: " + Encoding.UTF8.GetString(output));
+			Console.WriteLine ("Status message: " + encoding.GetString(output));
 			if(input[0] == (byte)'E') {
 				return;
 			}
