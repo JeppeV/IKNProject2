@@ -54,6 +54,7 @@ namespace Linklaget
 				}
 			}
 			buffer [j++] = DELIMITER;
+
 			serialPort.Write (buffer, 0, j);
 			
 		}
