@@ -46,10 +46,11 @@ namespace Application
 			}
 			Console.WriteLine ("Beginning receipt of file");
 			Array.Clear (input, 0, input.Length);
-			using (StreamWriter sw = new StreamWriter (new FileStream(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "test.txt"), FileMode.OpenOrCreate), encoding)) {
+			using (StreamWriter sw = new StreamWriter (new FileStream(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "test.txt"), FileMode.OpenOrCreate))) {
 				int size = transportLayer.receive (ref input);
 				while (size > 0) {
-					sw.Write (input, 0, size);
+					string s = encoding.GetString (input);
+					sw.Write (s);
 					Array.Clear (input, 0, input.Length);
 					size = transportLayer.receive (ref input);
 				}
