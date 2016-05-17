@@ -8,9 +8,6 @@ namespace Application
 {
 	class file_client
 	{
-		/// <summary>
-		/// The BUFSIZE.
-		/// </summary>
 		const int BUFSIZE = 1000;
 
 		byte[] output;

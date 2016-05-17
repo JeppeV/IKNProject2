@@ -1,14 +1,8 @@
 using System;
 using Linklaget;
 
-/// <summary>
-/// Transport.
-/// </summary>
 namespace Transportlaget
 {
-	/// <summary>
-	/// Transport.
-	/// </summary>
 	public class Transport
 	{
 
@@ -18,9 +12,11 @@ namespace Transportlaget
 
 		private byte seqNo;
 
-		private const int headerSize = 4;
+		private const int HEADER_SIZE = 4;
 
-		private const int maxErrorCount = 5;
+		private const int PACKET_DATA_INDEX = 4;
+
+		private const int MAX_ERROR_COUNT = 5;
 
 		private const int DEFAULT_SEQNO = 2;
 
@@ -71,18 +67,18 @@ namespace Transportlaget
 
 			link.send (packet, packet.Length);
 			while (!receiveAck ()) {
-				if (++errorCount == maxErrorCount) {
+				if (++errorCount == MAX_ERROR_COUNT) {
 					throw new TimeoutException ();
 				}
 				link.send (packet, packet.Length);
 			}
 		}
 
-		private byte[] createPacket(byte[] buf, int size){
-			byte[] packet = new byte[size + headerSize];
+		private byte[] createPacket(byte[] data, int size){
+			byte[] packet = new byte[size + HEADER_SIZE];
 			packet [(int)TransCHKSUM.SEQNO] = seqNo;
 			packet [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
-			Array.Copy (buf, 0, packet, headerSize, size);
+			Array.Copy (data, 0, packet, PACKET_DATA_INDEX, size);
 			checksum.calcChecksum (ref packet, packet.Length);
 			return packet;
 		}
@@ -99,10 +95,10 @@ namespace Transportlaget
 				size = link.receive (ref receiveBuffer);
 			}
 			// Copy data part of Transport Layer packet into receiver 'buf' array
-			Array.Copy (receiveBuffer, headerSize,  buf, 0, buf.Length);
+			Array.Copy (receiveBuffer, HEADER_SIZE,  buf, 0, buf.Length);
 			sendAck (true, receiveBuffer);
 			// Remove headerSize from size
-			size -= headerSize;
+			size -= HEADER_SIZE;
 			return size;
 		}
 			
