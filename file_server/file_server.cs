@@ -32,6 +32,7 @@ namespace Application
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
 				Array.Clear (input, 0, input.Length);
+				size = 0;
 			}
 		}
 			
