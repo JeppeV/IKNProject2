@@ -65,7 +65,7 @@ namespace Application
 						Array.Clear (output, 0, output.Length);
 						bytesRead = fs.Read (output, 0, BUFSIZE);
 					}catch(TimeoutException e){
-						//try again
+						Console.WriteLine("Caught TimeoutException, attempting to send same again");
 					}
 
 				}

@@ -91,7 +91,7 @@ namespace Transportlaget
 				link.send (sendBuffer, sendBuffer.Length);
 				errorCount++;
 				if (errorCount == 5) {
-					Console.WriteLine ("Transport: Timed out on sending item");
+
 					break;
 				}
 
@@ -99,6 +99,7 @@ namespace Transportlaget
 			if (errorCount != 5) {
 				Console.WriteLine ("Transport: Item succesfully sent with size: " + size);
 			} else {
+				Console.WriteLine ("Transport: Timed out on sending item");
 				throw new TimeoutException ();
 			}
 
@@ -114,7 +115,7 @@ namespace Transportlaget
 			int errorCount = 0;
 			Console.WriteLine ("Transport: Attempting to receive item");
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
-
+				Console.WriteLine ("Size of received item is " + size + ", checksum was wrong.");
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
