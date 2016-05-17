@@ -54,6 +54,7 @@ namespace Linklaget
 				}
 			}
 			buffer [j++] = DELIMITER;
+			Console.WriteLine ("Link: Sent item of size " + j);
 			serialPort.Write (buffer, 0, j);
 			
 		}
@@ -62,50 +63,49 @@ namespace Linklaget
 		{
 			Array.Clear (buffer, 0, buffer.Length);
 			int j = 0;
-
-
-			byte[] input = new byte[buffer.Length];
-			int bytesRead;
+		
 			try{
-				bytesRead = serialPort.Read (input, 0, input.Length);
+				char c = Convert.ToChar((byte)serialPort.ReadByte ());
+				if (c == 'A') {
+					byte current;
+					int count = 0;
+					while (true) {
+						current = (byte) serialPort.ReadByte ();
+						c = Convert.ToChar (current);
+						if (c == 'A')
+							break;
+						else {
+							buffer [count++] = current;
+						}
+
+					}
+						
+				
+					for (int i = 0; i < count; i++) {
+						current = buffer [i];
+						c = Convert.ToChar (current);
+						if (c == 'B') {
+							i++;
+							current = buffer [i];
+							c = Convert.ToChar (current);
+							if (c == 'C') {
+								buf[j++] = (byte)'A';
+
+							} else if (c == 'D') {
+								buf[j++] = (byte)'B';
+							}
+						} else {
+							buf [j++] = current;
+						}
+					}
+
+
+
+				}
 			}catch(TimeoutException e){
 				return 0;
 			}
-			char c = Convert.ToChar (input[0]);
-			if (c == 'A') {
-				byte current;
-				int count = 0;
-				for (int i = 1; i < bytesRead; i++) {
-					current = input [i];
-					c = Convert.ToChar (current);
-					if (c == 'A')
-						break;
-					else {
-						buffer [count++] = current;
-					}
-				}
-			
-				for (int i = 0; i < count; i++) {
-					current = buffer [i];
-					c = Convert.ToChar (current);
-					if (c == 'B') {
-						i++;
-						current = buffer [i];
-						c = Convert.ToChar (current);
-						if (c == 'C') {
-							buf[j++] = (byte)'A';
 
-						} else if (c == 'D') {
-							buf[j++] = (byte)'B';
-						}
-					} else {
-						buf [j++] = current;
-					}
-				}
-
-
-
-			}
 			return j;
 
 		}
