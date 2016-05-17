@@ -59,10 +59,15 @@ namespace Application
 				Array.Clear (output, 0, output.Length);
 				int bytesRead = fs.Read (output, 0, BUFSIZE);
 				while(bytesRead > 0){
-					Console.WriteLine ("sending bytes to client");
-					transportLayer.send (output, bytesRead);
-					Array.Clear (output, 0, output.Length);
-					bytesRead = fs.Read (output, 0, BUFSIZE);
+					Console.WriteLine ("sending bytes to client: " + bytesRead);
+					try{
+						transportLayer.send (output, bytesRead);
+						Array.Clear (output, 0, output.Length);
+						bytesRead = fs.Read (output, 0, BUFSIZE);
+					}catch(TimeoutException e){
+						//try again
+					}
+
 				}
 			}
 		}

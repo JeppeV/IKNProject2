@@ -98,6 +98,8 @@ namespace Transportlaget
 			}
 			if (errorCount != 5) {
 				Console.WriteLine ("Transport: Item succesfully sent with size: " + size);
+			} else {
+				throw new TimeoutException ();
 			}
 
 
