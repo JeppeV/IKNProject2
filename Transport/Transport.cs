@@ -114,10 +114,6 @@ namespace Transportlaget
 			int errorCount = 0;
 			Console.WriteLine ("Transport: Attempting to receive item");
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
-				if (size == 0) {
-					if (++errorCount == 5)
-						throw new TimeoutException ();
-				}
 
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
