@@ -31,6 +31,7 @@ namespace Application
 				Console.WriteLine ("Server: Received filename from client: " + fileName);
 				int fileSize = (int)LIB.check_File_Exists (fileName);
 				sendFile (fileName, fileSize);
+				Array.Clear (input, 0, input.Length);
 			}
 		}
 			
