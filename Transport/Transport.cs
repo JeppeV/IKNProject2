@@ -83,11 +83,11 @@ namespace Transportlaget
 			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
 			Array.Copy (buf, 0, sendBuffer, headerSize, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
-			Console.WriteLine ("Transport: Sending item");
-			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
+			//Console.WriteLine ("Transport: Sending item");
+			//Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			int errorCount = 0;
 			link.send (sendBuffer, sendBuffer.Length);
-			Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(buf));
+			//Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(buf));
 
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);
@@ -121,10 +121,10 @@ namespace Transportlaget
 				}
 			}
 
-			Array.Copy (receiveBuffer, 4,  buf, 0, buf.Length);
+			Array.Copy (receiveBuffer, headerSize,  buf, 0, buf.Length);
 			if (size > 0) {
 				sendAck (true, receiveBuffer);
-				size -= 4;
+				size -= headerSize;
 			}
 			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
