@@ -120,10 +120,13 @@ namespace Transportlaget
 			}
 
 			Array.Copy (receiveBuffer, 4,  buf, 0, buf.Length);
-			if(size > 0) sendAck (true, receiveBuffer);
+			if (size > 0) {
+				sendAck (true, receiveBuffer);
+				size -= 4;
+			}
 			Console.WriteLine ("Transport: Item successfully received with size: " + size);
 			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
-			return size - 4;
+			return size;
 		}
 	}
 }
