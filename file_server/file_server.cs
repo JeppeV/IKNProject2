@@ -28,9 +28,10 @@ namespace Application
 
 
 			var fileName = encoding.GetString (input).Substring(0, size);
+			fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
 			Console.WriteLine ("received filename from client " + fileName );
 			int fileSize = (int)LIB.check_File_Exists (fileName);
-			File.Open (fileName, FileMode.Open);
+			//File.Open (fileName, FileMode.Open);
 			sendFile (fileName, fileSize);
 			Array.Clear (input, 0, input.Length);
 
