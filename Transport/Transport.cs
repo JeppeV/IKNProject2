@@ -24,7 +24,7 @@ namespace Transportlaget
 
 		private int errorCount;
 
-		private const int headerSize = 4
+		private const int headerSize = 4;
 
 		private const int DEFAULT_SEQNO = 2;
 
