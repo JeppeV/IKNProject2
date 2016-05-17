@@ -16,13 +16,7 @@ namespace Transportlaget
 
 		private Checksum checksum;
 
-		private byte[] inputBuffer;
-
 		private byte seqNo;
-
-		private byte old_seqNo;
-
-		private int errorCount;
 
 		private const int headerSize = 4;
 
@@ -37,16 +31,13 @@ namespace Transportlaget
 			this.BUFSIZE = BUFSIZE;
 			link = new Link(BUFSIZE+(int)TransSize.ACKSIZE);
 			checksum = new Checksum();
-			inputBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			seqNo = 0;
-			old_seqNo = DEFAULT_SEQNO;
-			errorCount = 0;
 		}
 
 		private bool receiveAck()
 		{
-
 			byte[] buf = new byte[(int)TransSize.ACKSIZE];
+
 			int size = link.receive(ref buf);
 
 			if (size != (int)TransSize.ACKSIZE) {
@@ -58,7 +49,6 @@ namespace Transportlaget
 				return false;
 			}
 				
-			
 			seqNo = (byte)((buf[(int)TransCHKSUM.SEQNO] + 1) % 2);
 			return true;
 		}
@@ -76,34 +66,32 @@ namespace Transportlaget
 
 		public void send(byte[] buf, int size)
 		{
-
-			byte[] sendBuffer = new byte[size + headerSize];
-			sendBuffer [(int)TransCHKSUM.SEQNO] = seqNo;
-			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
-			Array.Copy (buf, 0, sendBuffer, headerSize, size);
-			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
+			byte[] packet = createPacket (buf, size);
 			int errorCount = 0;
-			link.send (sendBuffer, sendBuffer.Length);
 
+			link.send (packet, packet.Length);
 			while (!receiveAck ()) {
-				link.send (sendBuffer, sendBuffer.Length);
 				if (++errorCount == maxErrorCount) {
-					break;
+					throw new TimeoutException ();
 				}
-
+				link.send (packet, packet.Length);
 			}
-			if (errorCount == maxErrorCount) {
-				Console.WriteLine ("Transport: Timed out on sending item");
-				throw new TimeoutException ();
-			}
+		}
 
-
+		private byte[] createPacket(byte[] buf, int size){
+			byte[] packet = new byte[size + headerSize];
+			packet [(int)TransCHKSUM.SEQNO] = seqNo;
+			packet [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
+			Array.Copy (buf, 0, packet, headerSize, size);
+			checksum.calcChecksum (ref packet, packet.Length);
+			return packet;
 		}
 			
 
 		public int receive (ref byte[] buf)
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
+
 			int size = link.receive(ref receiveBuffer);
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
@@ -113,6 +101,7 @@ namespace Transportlaget
 			// Copy data part of Transport Layer packet into receiver 'buf' array
 			Array.Copy (receiveBuffer, headerSize,  buf, 0, buf.Length);
 			sendAck (true, receiveBuffer);
+			// Remove headerSize from size
 			size -= headerSize;
 			return size;
 		}
