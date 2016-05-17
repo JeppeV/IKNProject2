@@ -53,7 +53,6 @@ namespace Application
 					Array.Clear (input, 0, input.Length);
 					size = transportLayer.receive (ref input);
 				}
-				fs.Close ();
 			}
 			Console.WriteLine ("Client received file");
 

@@ -83,9 +83,8 @@ namespace Linklaget
 					else {
 						buffer [count++] = current;
 					}
-
 				}
-
+			
 				for (int i = 0; i < count; i++) {
 					current = buffer [i];
 					c = Convert.ToChar (current);
