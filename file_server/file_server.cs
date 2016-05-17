@@ -28,8 +28,8 @@ namespace Application
 
 
 			var fileName = encoding.GetString (input).Substring(0, size);
-			File.Open (fileName, FileMode.Open);
-			//fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
+			//File.Open (fileName, FileMode.Open);
+			fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
 			Console.WriteLine ("received filename from client " + fileName );
 			int fileSize = (int)LIB.check_File_Exists (fileName);
 
