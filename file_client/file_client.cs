@@ -25,8 +25,7 @@ namespace Application
 
 			transportLayer = new Transport (BUFSIZE);
 			string filePath = args [0];
-			//output = encoding.GetBytes(filePath);
-			output = GetBytes (filePath);
+			output = encoding.GetBytes(filePath);
 			Console.WriteLine ("filePath: " + encoding.GetString(output));
 			transportLayer.send (output, output.Length);
 			Console.WriteLine ("filename sent to server");
