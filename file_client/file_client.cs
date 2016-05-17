@@ -51,6 +51,9 @@ namespace Application
 				while (size > 0) {
 					fs.Write (input, 0, size); 
 					Array.Clear (input, 0, input.Length);
+					if (size < BUFSIZE) {
+						break;
+					}
 					size = transportLayer.receive (ref input);
 				}
 				fs.Flush ();
