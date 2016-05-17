@@ -22,16 +22,13 @@ namespace Application
 
 	    private file_client(String[] args)
 	    {
-
 			transportLayer = new Transport (BUFSIZE);
 			string filePath = args [0];
 			output = encoding.GetBytes(filePath);
-			Console.WriteLine ("filePath: " + encoding.GetString(output));
+			Console.WriteLine ("Client: Requesting file from server: " + encoding.GetString(output));
 			transportLayer.send (output, output.Length);
-			Console.WriteLine ("filename sent to server");
 			String fileName = LIB.extractFileName (filePath);
 			receiveFile (fileName);
-
 	    }
 
 
@@ -40,11 +37,12 @@ namespace Application
 		{
 			byte[] input = new byte[BUFSIZE];
 			transportLayer.receive (ref input);
-			Console.WriteLine ("Status message: " + encoding.GetString(input));
+			Console.WriteLine ("Client: Status message from server: " + encoding.GetString(input));
 			if(!(input[0] == (byte)'K')) {
+				Console.WriteLine ("Client: Server could not locate file, exiting application");
 				return;
 			}
-			Console.WriteLine ("Beginning receipt of file");
+			Console.WriteLine ("Client: Beginning receipt of file from server");
 			Array.Clear (input, 0, input.Length);
 			using (FileStream fs = new FileStream (Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, fileName), FileMode.OpenOrCreate)) {
 				int size = transportLayer.receive (ref input);
@@ -52,6 +50,7 @@ namespace Application
 					fs.Write (input, 0, size); 
 					Array.Clear (input, 0, input.Length);
 					if (size < BUFSIZE) {
+						//if the buffer was not full, we must have reached the end of the transmission
 						break;
 					}
 					size = transportLayer.receive (ref input);
@@ -59,16 +58,11 @@ namespace Application
 				fs.Flush ();
 				
 			}
-			Console.WriteLine ("Client received file");
+			Console.WriteLine ("Client: File received");
 
 		}
 			
-		/// <summary>
-		/// The entry point of the program, where the program control starts and ends.
-		/// </summary>
-		/// <param name='args'>
-		/// First argument: Filname
-		/// </param>
+
 		public static void Main (string[] args)
 		{
 			new file_client(args);

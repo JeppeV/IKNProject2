@@ -26,6 +26,8 @@ namespace Transportlaget
 
 		private const int headerSize = 4;
 
+		private const int maxErrorCount = 5;
+
 		private const int DEFAULT_SEQNO = 2;
 
 		private int BUFSIZE;
@@ -45,7 +47,6 @@ namespace Transportlaget
 		{
 
 			byte[] buf = new byte[(int)TransSize.ACKSIZE];
-			//Console.WriteLine ("Transport: Receiving ack");
 			int size = link.receive(ref buf);
 
 			if (size != (int)TransSize.ACKSIZE) {
@@ -81,24 +82,17 @@ namespace Transportlaget
 			sendBuffer [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
 			Array.Copy (buf, 0, sendBuffer, headerSize, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
-			//Console.WriteLine ("Transport: Sending item");
-			//Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			int errorCount = 0;
 			link.send (sendBuffer, sendBuffer.Length);
-			//Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(buf));
 
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);
-				errorCount++;
-				if (errorCount == 5) {
-
+				if (++errorCount == maxErrorCount) {
 					break;
 				}
 
 			}
-			if (errorCount != 5) {
-
-			} else {
+			if (errorCount == maxErrorCount) {
 				Console.WriteLine ("Transport: Timed out on sending item");
 				throw new TimeoutException ();
 			}
@@ -111,22 +105,17 @@ namespace Transportlaget
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
 			int size = link.receive(ref receiveBuffer);
-			int errorCount = 0;
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
-				if(size > 0)Console.WriteLine ("Size of received item is " + size + ", checksum was wrong.");
-
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
-
 			}
-
+			// Copy data part of Transport Layer packet into receiver 'buf' array
 			Array.Copy (receiveBuffer, headerSize,  buf, 0, buf.Length);
-			if (size > 0) {
-				sendAck (true, receiveBuffer);
-				size -= headerSize;
-			}
+			sendAck (true, receiveBuffer);
+			size -= headerSize;
 			return size;
 		}
+			
 	}
 }
