@@ -27,15 +27,21 @@ namespace Application
 			}
 
 
-			var fileName = System.Text.Encoding.Default.GetString (input);
-
-			//fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
+			var fileName = GetString(input);
 			Console.WriteLine ("received filename from client " + fileName );
 			int fileSize = (int)LIB.check_File_Exists (fileName);
+			File.Open (fileName, FileMode.Open);
 			sendFile (fileName, fileSize);
 			Array.Clear (input, 0, input.Length);
 
 
+		}
+
+		static string GetString(byte[] bytes)
+		{
+			char[] chars = new char[bytes.Length / sizeof(char)];
+			System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+			return new string(chars);
 		}
 			
 		private void sendFile(String fileName, int fileSize)

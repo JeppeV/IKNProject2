@@ -25,7 +25,8 @@ namespace Application
 
 			transportLayer = new Transport (BUFSIZE);
 			string filePath = args [0];
-			output = encoding.GetBytes(filePath);
+			//output = encoding.GetBytes(filePath);
+			output = GetBytes (filePath);
 			Console.WriteLine ("filePath: " + encoding.GetString(output));
 			transportLayer.send (output, output.Length);
 			Console.WriteLine ("filename sent to server");
@@ -41,7 +42,7 @@ namespace Application
 		{
 			byte[] input = new byte[BUFSIZE];
 			transportLayer.receive (ref input);
-			Console.WriteLine ("Status message: " + encoding.GetString(output));
+			Console.WriteLine ("Status message: " + encoding.GetString(input));
 			if(input[0] == (byte)'E') {
 				return;
 			}
@@ -58,6 +59,13 @@ namespace Application
 			}
 			Console.WriteLine ("Client received file");
 
+		}
+
+		static byte[] GetBytes(string str)
+		{
+			byte[] bytes = new byte[str.Length * sizeof(char)];
+			System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+			return bytes;
 		}
 
 		/// <summary>
