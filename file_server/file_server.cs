@@ -28,10 +28,11 @@ namespace Application
 
 
 			var fileName = encoding.GetString (input).Substring(0, size);
-			fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
+			File.Open (fileName, FileMode.Open);
+			//fileName = "/root/Desktop/IKNProject2/file_server/test.txt";
 			Console.WriteLine ("received filename from client " + fileName );
 			int fileSize = (int)LIB.check_File_Exists (fileName);
-			//File.Open (fileName, FileMode.Open);
+
 			sendFile (fileName, fileSize);
 			Array.Clear (input, 0, input.Length);
 
@@ -57,7 +58,7 @@ namespace Application
 				Array.Clear (output, 0, output.Length);
 				int bytesRead = fs.Read (output, 0, BUFSIZE);
 				while(bytesRead > 0){
-					Console.Write ("sending bytes to client");
+					Console.WriteLine ("sending bytes to client");
 					transportLayer.send (output, bytesRead);
 					Array.Clear (output, 0, output.Length);
 					bytesRead = fs.Read (output, 0, BUFSIZE);

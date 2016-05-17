@@ -82,10 +82,10 @@ namespace Transportlaget
 			Array.Copy (buf, 0, sendBuffer, 4, size);
 			checksum.calcChecksum (ref sendBuffer, sendBuffer.Length);
 			Console.WriteLine ("Transport: Sending item");
-			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(sendBuffer));
+			Console.WriteLine ("Transport: " + System.Text.Encoding.Default.GetString(buf));
 			int count = 0;
 			link.send (sendBuffer, sendBuffer.Length);
-			Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(sendBuffer));
+			Console.WriteLine ("Transport: Attempting to send: " + System.Text.Encoding.Default.GetString(buf));
 
 			while (!receiveAck ()) {
 				link.send (sendBuffer, sendBuffer.Length);
