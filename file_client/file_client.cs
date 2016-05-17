@@ -50,6 +50,7 @@ namespace Application
 				int size = transportLayer.receive (ref input);
 				while (size > 0) {
 					string s = encoding.GetString (input);
+					Console.Write("Writing string of length: " + s.Length);
 					sw.Write (s);
 					Array.Clear (input, 0, input.Length);
 					size = transportLayer.receive (ref input);
