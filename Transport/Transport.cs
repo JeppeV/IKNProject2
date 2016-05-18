@@ -14,7 +14,7 @@ namespace Transportlaget
 
 		private const int HEADER_SIZE = 4;
 
-		private const int PACKET_DATA_INDEX = 4;
+		private const int SEGMENT_DATA_INDEX = 4;
 
 		private const int MAX_ERROR_COUNT = 5;
 
@@ -81,7 +81,7 @@ namespace Transportlaget
 			byte[] segment = new byte[size + HEADER_SIZE];
 			segment [(int)TransCHKSUM.SEQNO] = seqNo;
 			segment [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
-			Array.Copy (data, 0, segment, PACKET_DATA_INDEX, size);
+			Array.Copy (data, 0, segment, SEGMENT_DATA_INDEX, size);
 			checksum.calcChecksum (ref segment, segment.Length);
 			return segment;
 		}
