@@ -62,18 +62,21 @@ namespace Transportlaget
 
 		public void send(byte[] buf, int size)
 		{
+			// create transport-layer packet and attempt to send
 			byte[] packet = createPacket (buf, size);
 			int errorCount = 0;
 
 			link.send (packet, packet.Length);
 			while (!receiveAck ()) {
 				if (++errorCount == MAX_ERROR_COUNT) {
+					// if we did not receive a positive ack 5 times in a row, throw a TimeoutException
 					throw new TimeoutException ();
 				}
 				link.send (packet, packet.Length);
 			}
 		}
 
+		// provided a some byte data and the size of that data, this method creates a transport-layer packet
 		private byte[] createPacket(byte[] data, int size){
 			byte[] packet = new byte[size + HEADER_SIZE];
 			packet [(int)TransCHKSUM.SEQNO] = seqNo;
@@ -87,7 +90,7 @@ namespace Transportlaget
 		public int receive (ref byte[] buf)
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
-
+			// attempt to receive packet. If the checksums don't match, send a negative ack and try again. 
 			int size = link.receive(ref receiveBuffer);
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
@@ -96,6 +99,7 @@ namespace Transportlaget
 			}
 			// Copy data part of Transport Layer packet into receiver 'buf' array
 			Array.Copy (receiveBuffer, HEADER_SIZE,  buf, 0, buf.Length);
+			// send positive ack on succesful receipt
 			sendAck (true, receiveBuffer);
 			// Remove headerSize from size
 			size -= HEADER_SIZE;

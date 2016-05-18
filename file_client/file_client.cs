@@ -20,11 +20,13 @@ namespace Application
 	    private file_client(String[] args)
 	    {
 			transportLayer = new Transport (BUFSIZE);
+			// get filepath from input arguments and send to server
 			string filePath = args [0];
 			output = encoding.GetBytes(filePath);
 			Console.WriteLine ("Client: Requesting file from server: " + encoding.GetString(output));
 			transportLayer.send (output, output.Length);
 			String fileName = LIB.extractFileName (filePath);
+			// attempt to receive file from server
 			receiveFile (fileName);
 	    }
 
@@ -33,13 +35,17 @@ namespace Application
 		private void receiveFile (String fileName)
 		{
 			byte[] input = new byte[BUFSIZE];
+			// receive status message from server
 			transportLayer.receive (ref input);
 			Console.WriteLine ("Client: Status message from server: " + encoding.GetString(input));
 			if(!(input[0] == (byte)'K')) {
+				// if status message is not (O)K, abort file receipt
 				Console.WriteLine ("Client: Server could not locate file, exiting application");
 				return;
 			}
+
 			Console.WriteLine ("Client: Beginning receipt of file from server");
+			// clear previous input and begin receipt of file from server
 			Array.Clear (input, 0, input.Length);
 			using (FileStream fs = new FileStream (Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, fileName), FileMode.OpenOrCreate)) {
 				int size = transportLayer.receive (ref input);
