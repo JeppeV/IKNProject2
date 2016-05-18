@@ -62,42 +62,42 @@ namespace Transportlaget
 
 		public void send(byte[] buf, int size)
 		{
-			// create transport-layer packet and attempt to send
-			byte[] packet = createPacket (buf, size);
+			// create transport-layer segment and attempt to send
+			byte[] segment = createSegment (buf, size);
 			int errorCount = 0;
 
-			link.send (packet, packet.Length);
+			link.send (segment, segment.Length);
 			while (!receiveAck ()) {
 				if (++errorCount == MAX_ERROR_COUNT) {
 					// if we did not receive a positive ack 5 times in a row, throw a TimeoutException
 					throw new TimeoutException ();
 				}
-				link.send (packet, packet.Length);
+				link.send (segment, segment.Length);
 			}
 		}
 
-		// provided a some byte data and the size of that data, this method creates a transport-layer packet
-		private byte[] createPacket(byte[] data, int size){
-			byte[] packet = new byte[size + HEADER_SIZE];
-			packet [(int)TransCHKSUM.SEQNO] = seqNo;
-			packet [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
-			Array.Copy (data, 0, packet, PACKET_DATA_INDEX, size);
-			checksum.calcChecksum (ref packet, packet.Length);
-			return packet;
+		// provided a some byte data and the size of that data, this method creates a transport-layer segment
+		private byte[] createSegment(byte[] data, int size){
+			byte[] segment = new byte[size + HEADER_SIZE];
+			segment [(int)TransCHKSUM.SEQNO] = seqNo;
+			segment [(int)TransCHKSUM.TYPE] = (byte)TransType.DATA;
+			Array.Copy (data, 0, segment, PACKET_DATA_INDEX, size);
+			checksum.calcChecksum (ref segment, segment.Length);
+			return segment;
 		}
 			
 
 		public int receive (ref byte[] buf)
 		{
 			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
-			// attempt to receive packet. If the checksums don't match, send a negative ack and try again. 
+			// attempt to receive segment. If the checksums don't match, send a negative ack and try again. 
 			int size = link.receive(ref receiveBuffer);
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
 				sendAck (false, receiveBuffer);
 				Array.Clear (receiveBuffer, 0, receiveBuffer.Length);
 				size = link.receive (ref receiveBuffer);
 			}
-			// Copy data part of Transport Layer packet into receiver 'buf' array
+			// Copy data part of Transport Layer segment into receiver 'buf' array
 			Array.Copy (receiveBuffer, HEADER_SIZE,  buf, 0, buf.Length);
 			// send positive ack on succesful receipt
 			sendAck (true, receiveBuffer);
