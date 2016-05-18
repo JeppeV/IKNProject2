@@ -89,7 +89,7 @@ namespace Transportlaget
 
 		public int receive (ref byte[] buf)
 		{
-			byte[] receiveBuffer = new byte[BUFSIZE+(int)TransSize.ACKSIZE];
+			byte[] receiveBuffer = new byte[BUFSIZE + HEADER_SIZE];
 			// attempt to receive segment. If the checksums don't match, send a negative ack and try again. 
 			int size = link.receive(ref receiveBuffer);
 			while (!checksum.checkChecksum (receiveBuffer, size)) {
